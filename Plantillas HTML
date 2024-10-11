@@ -1,0 +1,21 @@
+<form method="post">
+    {% csrf_token %}
+    {{ autor_form.as_p }}
+    {{ libro_form.as_p }}
+    <button type="submit">Insertar</button>
+</form>
+
+
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+<ul>
+    {% for libro in libros %}
+        <li>{{ libro.titulo }} - {{ libro.autor.nombre }}</li>
+    {% empty %}
+        <li>No se encontraron libros.</li>
+    {% endfor %}
+</ul>
