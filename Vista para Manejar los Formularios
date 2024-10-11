@@ -1,0 +1,21 @@
+from django.shortcuts import render, redirect
+from .forms import AutorForm, LibroForm
+
+def insertar_datos(request):
+    if request.method == 'POST':
+        autor_form = AutorForm(request.POST)
+        libro_form = LibroForm(request.POST)
+        
+        if autor_form.is_valid() and libro_form.is_valid():
+            autor_form.save()
+            libro_form.save()
+            return redirect('success_url')  # Redirige a una página de éxito
+    
+    else:
+        autor_form = AutorForm()
+        libro_form = LibroForm()
+    
+    return render(request, 'insertar_datos.html', {
+        'autor_form': autor_form,
+        'libro_form': libro_form,
+    })
